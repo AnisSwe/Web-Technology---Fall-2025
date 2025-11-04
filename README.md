@@ -1,1 +1,1 @@
-uniersity lab tasks
+university lab tasks
