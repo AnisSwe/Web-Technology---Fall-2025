@@ -1,5 +1,6 @@
 <?php
 session_start();
+<<<<<<< HEAD
 require_once __DIR__ ."/../Model/UserModel.php";
 require_once __DIR__ ."/../Model/db.php";
 
@@ -38,6 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     
     $model = new UserModel($conn);
+=======
+ require_once __DIR__ ."/../Model/UserModel.php";
+require_once __DIR__ ."/../Model/db.php";
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $userId   = trim($_POST['userId'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+    $model    = new UserModel($conn);
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
 
     // --- Admin login ---
     $admin = $model->findAdminByCredentials($userId, $password);
@@ -52,9 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+<<<<<<< HEAD
     // --- Invalid credentials ---
     $_SESSION['login-error_message'] = "Invalid Log In, Please Enter Valid Credential";
     header("Location: ../View/login.php");
     exit;
 }
 ?>
+=======
+  
+
+    // --- Invalid credentials ---
+    $_SESSION['login-error_message'] = "Invalid Log In, Please Enter Valid Credential";
+    header("Location:login.php");
+    exit;
+}
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7

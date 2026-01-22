@@ -35,7 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
     // HASH PASSWORD
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 

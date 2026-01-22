@@ -1,7 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'], $_COOKIE['logged_in']) || $_SESSION['user_type'] !== 'Admin') {
+<<<<<<< HEAD
     header("Location:../View/login.php");
+=======
+    header("Location:../Views/login.php");
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
     exit;
 }
 

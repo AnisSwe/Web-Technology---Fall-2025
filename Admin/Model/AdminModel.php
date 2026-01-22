@@ -15,7 +15,11 @@ class AdminModel {
         mysqli_stmt_execute($stmtCheck);
         $resultCheck = mysqli_stmt_get_result($stmtCheck);
         if (mysqli_num_rows($resultCheck) > 0) {
+<<<<<<< HEAD
             return false;
+=======
+            return "email_exists";
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
         }
 
         // Generate unique admin ID: ADM + 4 random digits
@@ -27,6 +31,7 @@ class AdminModel {
         return mysqli_stmt_execute($stmt);
     }
 
+<<<<<<< HEAD
     // Delete Admin with check for last admin and self-delete prevention
     public function deleteAdmin($adminId) {
         // Prevent self delete
@@ -39,10 +44,29 @@ class AdminModel {
         $resultCount = mysqli_query($this->conn, $sqlCount);
         $row = mysqli_fetch_assoc($resultCount);
 
+=======
+    // Delete Admin with check for last admin and super admin password
+    public function deleteAdmin($adminId, $superAdminPass) {
+        // Verify super admin password
+        $sqlCheck = "SELECT * FROM super_admin WHERE pass=?";
+        $stmtCheck = mysqli_prepare($this->conn, $sqlCheck);
+        mysqli_stmt_bind_param($stmtCheck, "s", $superAdminPass);
+        mysqli_stmt_execute($stmtCheck);
+        $resultCheck = mysqli_stmt_get_result($stmtCheck);
+        if (mysqli_num_rows($resultCheck) === 0) {
+            return "wrong_super_pass";
+        }
+
+        // Count total admins
+        $sqlCount = "SELECT COUNT(*) AS total FROM Admin";
+        $resultCount = mysqli_query($this->conn, $sqlCount);
+        $row = mysqli_fetch_assoc($resultCount);
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
         if ($row['total'] <= 1) {
             return "last_admin";
         }
 
+<<<<<<< HEAD
         // Delete
         $sql = "DELETE FROM Admin WHERE admin_id=?";
         $stmt = mysqli_prepare($this->conn, $sql);
@@ -87,6 +111,13 @@ class AdminModel {
         }
 
         return false;
+=======
+        // Proceed to delete
+        $sql = "DELETE FROM Admin WHERE admin_id=?";
+        $stmt = mysqli_prepare($this->conn, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $adminId);
+        return mysqli_stmt_execute($stmt);
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
     }
 
     // Get all admins
@@ -94,6 +125,7 @@ class AdminModel {
         $sql = "SELECT * FROM Admin ORDER BY created_at DESC";
         $result = mysqli_query($this->conn, $sql);
         $rows = [];
+<<<<<<< HEAD
         while($r = mysqli_fetch_assoc($result)) {
             $rows[] = $r;
         }
@@ -101,3 +133,11 @@ class AdminModel {
     }
 }
 ?>
+=======
+        while($r = mysqli_fetch_assoc($result)) $rows[] = $r;
+        return $rows;
+    }
+   
+}
+?>
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7

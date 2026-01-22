@@ -2,12 +2,18 @@
 
 <!-- Messages -->
 <?php if(isset($_GET['error'])): ?>
+<<<<<<< HEAD
     <?php if($_GET['error'] === 'self_delete'): ?>
         <p class="Amsg Aerror">You cannot delete your own admin account!</p>
+=======
+    <?php if($_GET['error'] === 'wrong_super_pass'): ?>
+        <p class="Amsg Aerror">Super admin password is incorrect!</p>
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
     <?php elseif($_GET['error'] === 'last_admin'): ?>
         <p class="Amsg Aerror">Cannot delete the last admin!</p>
     <?php elseif($_GET['error'] === 'delete_fail'): ?>
         <p class="Amsg Aerror">Failed to delete admin.</p>
+<<<<<<< HEAD
     <?php elseif($_GET['error'] === 'email_exists'): ?>
         <p class="Amsg Aerror">Email already exists!</p>
     <?php elseif($_GET['error'] === 'email_exists_update'): ?>
@@ -30,6 +36,15 @@
 <?php endif; ?>
 
 <!-- Add Admin Form -->
+=======
+    <?php endif; ?>
+<?php endif; ?>
+
+<?php if(isset($_GET['success']) && $_GET['success'] === 'delete'): ?>
+    <p class="Amsg Asuccess">Admin deleted successfully.</p>
+<?php endif; ?>
+
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
 <form method="POST" action="admindashboard.php" class="Aadmin-form">
     <input type="hidden" name="action" value="add_admin">
     <input type="text" name="name" placeholder="Admin Name" required class="Aform-input">
@@ -38,6 +53,7 @@
     <button type="submit" class="Abtn Abtn-primary">Add Admin</button>
 </form>
 
+<<<<<<< HEAD
 <!-- Admin List -->
 <table class="Aadmin-table">
     <tr>
@@ -63,6 +79,27 @@
                   onsubmit="return confirm('Are you sure you want to delete this admin?');">
                 <input type="hidden" name="action" value="delete_admin">
                 <input type="hidden" name="admin_id" value="<?= htmlspecialchars($admin['admin_id']) ?>">
+=======
+<?php if(isset($_GET['error']) && $_GET['error'] === 'email_exists'): ?>
+    <p class="Amsg Aerror">Email already exists!</p>
+<?php endif; ?>
+
+<!-- Admin List -->
+<table class="Aadmin-table">
+    <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Action</th>
+    </tr>
+    <?php foreach($admins as $admin): ?>
+    <tr>
+        <td><?= $admin['admin_id'] ?></td>
+        <td><?= $admin['name'] ?></td>
+        <td><?= $admin['email'] ?></td>
+        <td>
+            <form method="POST" class="Adelete-form">
+                <input type="hidden" name="action" value="delete_admin">
+                <input type="hidden" name="admin_id" value="<?= $admin['admin_id'] ?>">
+                <input type="password" name="super_pass" placeholder="" required class="Aform-input Asmall">
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
                 <button type="submit" class="Abtn Abtn-danger">Delete</button>
             </form>
         </td>
@@ -70,6 +107,7 @@
     <?php endforeach; ?>
 </table>
 
+<<<<<<< HEAD
 <!-- Edit Modal-->
 <div id="editModal" class="Amodal" style="display:none;">
     <div class="Amodal-content">
@@ -110,4 +148,7 @@ window.onclick = function(event) {
     }
 }
 </script>
+=======
+
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
 

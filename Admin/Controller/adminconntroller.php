@@ -1,26 +1,36 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
 require_once __DIR__ . "/../Model/db.php";
 require_once __DIR__ . "/../Model/UserModel.php";
 require_once __DIR__ . "/../Model/AdminModel.php";
 require_once __DIR__ . "/../Model/ProductModel.php";
+<<<<<<< HEAD
 require_once __DIR__ . "/../Model/OrderModel.php";
 require_once __DIR__ . "/../Model/PaymentModel.php";
 require_once __DIR__ . "/../Model/ReviewModel.php";
 require_once __DIR__ . "/../Model/ContactModel.php";
 
 
+=======
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
 
 class AdminController {
     private $conn;
     private $userModel;
     private $adminModel;
     private $productModel;
+<<<<<<< HEAD
     private $orderModel;
     private $paymentModel;
     private $reviewModel;
     private $contactModel;
  
+=======
+
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
 
     public function __construct() {
         global $conn;
@@ -28,6 +38,7 @@ class AdminController {
         $this->userModel = new UserModel($this->conn);
         $this->adminModel = new AdminModel($this->conn);
         $this->productModel = new ProductModel($this->conn);
+<<<<<<< HEAD
         $this->orderModel = new OrderModel($this->conn);
         $this->paymentModel = new PaymentModel($this->conn);
         $this->reviewModel = new ReviewModel($this->conn);
@@ -36,6 +47,17 @@ class AdminController {
     }
 
     public function handleActions() {
+=======
+    }
+
+    public function handleActions() {
+        // --- User search (GET) ---
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'search_user') {
+            // Don't exit here, just return - let loadSection handle the display
+            return;
+        }
+          
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
         // --- Add admin (POST) ---
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_admin') {
             $name = $_POST['name'];
@@ -55,6 +77,7 @@ class AdminController {
         // --- Delete Admin ---
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_admin') {
             $adminId = $_POST['admin_id'];
+<<<<<<< HEAD
 
             $result = $this->adminModel->deleteAdmin($adminId);
 
@@ -64,12 +87,24 @@ class AdminController {
                 header("Location: admindashboard.php?section=admins&error=last_admin");
             } elseif ($result === "cannot_delete_self") {
                 header("Location: admindashboard.php?section=admins&error=self_delete");
+=======
+            $superPass = $_POST['super_pass'];
+            $result = $this->adminModel->deleteAdmin($adminId, $superPass);
+
+            if ($result === true) {
+                header("Location: admindashboard.php?section=admins&success=delete");
+            } elseif ($result === "wrong_super_pass") {
+                header("Location: admindashboard.php?section=admins&error=wrong_super_pass");
+            } elseif ($result === "last_admin") {
+                header("Location: admindashboard.php?section=admins&error=last_admin");
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
             } else {
                 header("Location: admindashboard.php?section=admins&error=delete_fail");
             }
             exit;
         }
 
+<<<<<<< HEAD
         // --- Update Admin ---
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_admin') {
             $adminId = $_POST['admin_id'];
@@ -89,6 +124,8 @@ class AdminController {
             exit;
         }
 
+=======
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
         // --- Delete user ---
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete_user') {
             $this->userModel->deleteUser($_POST['user_id']);
@@ -187,6 +224,7 @@ class AdminController {
             header("Location: admindashboard.php?section=products&success=stock_updated");
             exit;
         }
+<<<<<<< HEAD
 
         // --- Orders management ---
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_order_status') {
@@ -221,6 +259,8 @@ class AdminController {
         }
      
         
+=======
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
     }
 
     public function loadSection($section) {
@@ -243,6 +283,7 @@ class AdminController {
                 include __DIR__ . "/../View/sections/admins.php";
                 break;
 
+<<<<<<< HEAD
            // Update the 'orders' case in the loadSection() method:
 
             case 'orders':
@@ -282,8 +323,24 @@ class AdminController {
                 include __DIR__ . "/../View/sections/queries.php";
                 break;
    
+=======
+        case 'products':
+             $category = $_GET['category'] ?? '';
+             $keyword = $_GET['keyword'] ?? '';
+             $products = $this->productModel->searchProductsAdmin($category, $keyword);
+    
+             $farmers = $this->userModel->getAllFarmers();
+    
+             include __DIR__ . "/../View/sections/products.php";
+              break;
+
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
             default:
                 echo "<p>Invalid Section</p>";
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7

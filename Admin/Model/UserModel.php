@@ -13,6 +13,10 @@ class UserModel {
         $result = mysqli_stmt_get_result($stmt);
         return mysqli_fetch_assoc($result) ?: null;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2404d430e75337f674156b672a9937742fe9b4b7
     public function userIdExists($userId) {
         $sql = "SELECT user_id FROM Users WHERE user_id=?";
         $stmt = mysqli_prepare($this->conn, $sql);
