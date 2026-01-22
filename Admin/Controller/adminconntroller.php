@@ -155,7 +155,7 @@ class AdminController {
             exit;
         }
 
-        // --- Add Product (POST) ---
+        //  Add Product (POST) ---
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_product') {
             $name = trim($_POST['name']);
             $category = $_POST['category'];
@@ -164,7 +164,7 @@ class AdminController {
             $stock = intval($_POST['stock']);
             $description = trim($_POST['description'] ?? '');
             
-            // Handle image upload
+            
             $imagePath = null;
             if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
                 $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
